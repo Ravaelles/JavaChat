@@ -1,4 +1,4 @@
-package networking;
+package network;
 
 import javax.swing.*;
 import java.awt.*;
@@ -67,7 +67,6 @@ public class ServerGUI extends JFrame implements ActionListener, WindowListener 
             tPortNumber.setEditable(true);
             appendEvent("Server crashed\n");
             server = null;
-            //
         }
 
     }

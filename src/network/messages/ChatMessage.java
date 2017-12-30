@@ -1,4 +1,4 @@
-package networking;
+package network.messages;
 
 import java.io.*;
 
@@ -16,22 +16,31 @@ public class ChatMessage implements Serializable {
     // WHOISIN to receive the list of the users connected
     // MESSAGE an ordinary message
     // LOGOUT to disconnect from the Server
-    static final int WHOISIN = 0, MESSAGE = 1, LOGOUT = 2;
-    private int type;
+    public static final String WHO_IS_IN = "WHO_IS_IN";
+    public static final String MESSAGE = "MESSAGE";
+    public static final String LOGOUT = "LOG_OUT";
+    
+    // Message type
+    private String type;
+    
+    // Message content
     private String message;
+    
+    // -------------------------------------------------------------------- 
+    // CONSTRUCTORS
 
-    // constructor
-    ChatMessage(int type, String message) {
+    public ChatMessage(String type, String message) {
         this.type = type;
         this.message = message;
     }
 
-    // getters
-    int getType() {
+    // -------------------------------------------------------------------- 
+    
+    public String getType() {
         return type;
     }
 
-    String getMessage() {
+    public String getMessage() {
         return message;
     }
 }

@@ -1,5 +1,6 @@
-package networking;
+package network;
 
+import network.messages.ChatMessage;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -136,7 +137,7 @@ public class ClientGUI extends JFrame implements ActionListener {
         }
         // if it the who is in button
         if (o == whoIsIn) {
-            client.sendMessage(new ChatMessage(ChatMessage.WHOISIN, ""));
+            client.sendMessage(new ChatMessage(ChatMessage.WHO_IS_IN, ""));
             return;
         }
 
