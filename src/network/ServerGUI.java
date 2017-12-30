@@ -20,6 +20,16 @@ public class ServerGUI extends JFrame implements ActionListener, WindowListener 
     private Server server;
 
     // -------------------------------------------------------------------- 
+    
+    // entry point to start the Server
+    public static void main(String[] arg) {
+        // start server default port 1500
+        new ServerGUI(1500);
+    }
+    
+    // -------------------------------------------------------------------- 
+    // CONSTRUCTORS
+    
     // server constructor that receive the port to listen to for connection as parameter
     ServerGUI(int port) {
         super("Chat Server");
@@ -109,12 +119,6 @@ public class ServerGUI extends JFrame implements ActionListener, WindowListener 
         new ServerRunning().start();
         stopStart.setText("Stop");
         tPortNumber.setEditable(false);
-    }
-
-    // entry point to start the Server
-    public static void main(String[] arg) {
-        // start server default port 1500
-        new ServerGUI(1500);
     }
 
     /*

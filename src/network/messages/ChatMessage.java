@@ -18,6 +18,7 @@ public class ChatMessage implements Serializable {
     // LOGOUT to disconnect from the Server
     public static final String WHO_IS_IN = "WHO_IS_IN";
     public static final String MESSAGE = "MESSAGE";
+    public static final String MOVE = "MOVE";
     public static final String LOGOUT = "LOG_OUT";
     
     // Message type

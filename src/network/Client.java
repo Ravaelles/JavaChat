@@ -1,4 +1,4 @@
-package network;
+            package network;
 
 import network.messages.ChatMessage;
 import java.net.*;
@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.*;
 
 /*
- * The Client that can be run both as a console or a GUI
+            * The Client that can be run both as a console or a GUI
  */
 public class Client {
 
@@ -22,56 +22,56 @@ public class Client {
     private String server;
     private String username;
     private int port;
-    
+
     // -------------------------------------------------------------------- 
-    
     private static void handleReceiveMessages(Client client) {
-        
+
         // wait for messages from user
         Scanner scanner = new Scanner(System.in);
-        
+
         // loop forever for message from the user
         while (true) {
             System.out.print("> ");
-            
+
             // read message from user
             String message = scanner.nextLine();
-            
+
             // logout if message is LOGOUT
             if (message.equalsIgnoreCase(ChatMessage.LOGOUT)) {
                 client.sendMessage(new ChatMessage(ChatMessage.LOGOUT, ""));
                 break; // break to do the disconnect
-            } 
-
-            // message WHO_IS_IN
+            } // message WHO_IS_IN
             else if (message.equalsIgnoreCase(ChatMessage.WHO_IS_IN)) {
                 client.sendMessage(new ChatMessage(ChatMessage.WHO_IS_IN, ""));
-            } 
-            
-            // default to ordinary message
-            else {				
+            } // Message MOVE - made by a user
+            else if (message.equalsIgnoreCase(ChatMessage.MOVE)) {
+                client.sendMessage(new ChatMessage(ChatMessage.MOVE, "A 7 B 13"));
+            } // default to ordinary message
+            else {
                 client.sendMessage(new ChatMessage(ChatMessage.MESSAGE, message));
             }
         }
     }
-    
+
+    // -------------------------------------------------------------------- 
+
     /*
-	 * To start the Client in console mode use one of the following command
-	 * > java Client
-	 * > java Client username
-	 * > java Client username portNumber
-	 * > java Client username portNumber serverAddress
-	 * at the console prompt
-	 * If the portNumber is not specified 1500 is used
-	 * If the serverAddress is not specified "localHost" is used
-	 * If the username is not specified "Anonymous" is used
-	 * > java Client 
-	 * is equivalent to
-	 * > java Client Anonymous 1500 localhost 
-	 * are eqquivalent
-	 * 
-	 * In console mode, if an error occurs the program simply stops
-	 * when a GUI id used, the GUI is informed of the disconnection
+            * To start the Client in console mode use one of the following command
+            * > java Client
+            * > java Client username
+            * > java Client username portNumber
+            * > java Client username portNumber serverAddress
+            * at the console prompt
+            * If the portNumber is not specified 1500 is used
+            * If the serverAddress is not specified "localHost" is used
+            * If the username is not specified "Anonymous" is used
+            * > java Client 
+            * is equivalent to
+            * > java Client Anonymous 1500 localhost 
+            * are eqquivalent
+            * 
+            * In console mode, if an error occurs the program simply stops
+            * when a GUI id used, the GUI is informed of the disconnection
      */
     public static void main(String[] args) {
         // default values
@@ -114,7 +114,7 @@ public class Client {
 
         // Receive messages in a loop
         handleReceiveMessages(client);
-        
+
         // done disconnect
         client.disconnect();
     }
@@ -122,10 +122,10 @@ public class Client {
     // -------------------------------------------------------------------- 
     // CONSTRUCTORS
     /*
-	 *  Constructor called by console mode
-	 *  server: the server address
-	 *  port: the port number
-	 *  username: the username
+            *  Constructor called by console mode
+            *  server: the server address
+            *  port: the port number
+            *  username: the username
      */
     Client(String server, int port, String username) {
         // which calls the common constructor with the GUI set to null
@@ -133,8 +133,8 @@ public class Client {
     }
 
     /*
-	 * Constructor call when used from a GUI
-	 * in console mode the ClienGUI parameter is null
+            * Constructor call when used from a GUI
+            * in console mode the ClienGUI parameter is null
      */
     Client(String server, int port, String username, ClientGUI cg) {
         this.server = server;
@@ -145,9 +145,9 @@ public class Client {
     }
 
     // -------------------------------------------------------------------- 
-    
+
     /*
-	 * To start the dialog
+            * To start the dialog
      */
     public boolean start() {
         // try to connect to the server
@@ -187,7 +187,7 @@ public class Client {
     }
 
     /*
-	 * To send a message to the console or the GUI
+            * To send a message to the console or the GUI
      */
     private void display(String msg) {
         if (clientGui == null) {
@@ -198,7 +198,7 @@ public class Client {
     }
 
     /*
-	 * To send a message to the server
+            * To send a message to the server
      */
     void sendMessage(ChatMessage msg) {
         try {
@@ -209,8 +209,8 @@ public class Client {
     }
 
     /*
-	 * When something goes wrong
-	 * Close the Input/Output streams and disconnect not much to do in the catch clause
+            * When something goes wrong
+            * Close the Input/Output streams and disconnect not much to do in the catch clause
      */
     private void disconnect() {
         try {
@@ -240,8 +240,8 @@ public class Client {
     }
 
     /*
-	 * a class that waits for the message from the server and append them to the JTextArea
-	 * if we have a GUI or simply System.out.println() it in console mode
+            * a class that waits for the message from the server and append them to the JTextArea
+            * if we have a GUI or simply System.out.println() it in console mode
      */
     class ListenFromServer extends Thread {
 

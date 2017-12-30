@@ -58,6 +58,8 @@ public class Server {
         // create a server object and start it
         Server server = new Server(portNumber);
         server.start();
+        
+        ServerGUI.main(new String[] { });
     }
     
     // -------------------------------------------------------------------- 
@@ -72,12 +74,16 @@ public class Server {
     }
 
     public Server(int port, ServerGUI sg) {
+        
         // GUI or not
         this.sg = sg;
+        
         // the port
         this.port = port;
+        
         // to display hh:mm:ss
         sdf = new SimpleDateFormat("HH:mm:ss");
+        
         // ArrayList for the Client list
         clientThreads = new ArrayList<ClientThread>();
     }
@@ -86,25 +92,31 @@ public class Server {
     
     public void start() {
         keepGoing = true;
+        
         /* create socket server and wait for connection requests */
         try {
+            
             // the socket used by the server
             ServerSocket serverSocket = new ServerSocket(port);
 
             // infinite loop to wait for connections
             while (keepGoing) {
+                
                 // format message saying we are waiting
                 display("Server waiting for Clients on port " + port + ".");
 
                 Socket socket = serverSocket.accept();  	// accept connection
+                
                 // if I was asked to stop
                 if (!keepGoing) {
                     break;
                 }
+                
                 ClientThread clientThread = new ClientThread(socket);  // make a thread of it
                 clientThreads.add(clientThread);									// save it in the ArrayList
                 clientThread.start();
             }
+            
             // I was asked to stop
             try {
                 serverSocket.close();
@@ -121,7 +133,9 @@ public class Server {
             } catch (Exception e) {
                 display("Exception closing the server and clients: " + e);
             }
-        } // something went bad
+        } 
+
+        // something went bad
         catch (IOException e) {
             String msg = sdf.format(new Date()) + " Exception on new ServerSocket: " + e + "\n";
             display(msg);
@@ -212,11 +226,14 @@ public class Server {
 
         // Constructore
         ClientThread(Socket socket) {
+            
             // a unique id
             id = ++uniqueId;
+            
             this.socket = socket;
             /* Creating both Data Stream */
             System.out.println("Thread trying to create Object Input/Output Streams");
+            
             try {
                 // create output first
                 sOutput = new ObjectOutputStream(socket.getOutputStream());
